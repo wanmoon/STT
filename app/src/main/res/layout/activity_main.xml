@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/mic"
         android:layout_marginTop="138dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/speakNow"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:onClick="onButtonClick" />
@@ -25,7 +25,7 @@
         android:text="Tap to speech"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton"
+        android:layout_below="@+id/speakNow"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:id="@+id/textView2" />
@@ -36,5 +36,5 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="71dp"
-        android:id="@+id/TVresult" />
+        android:id="@+id/TVresult"/>
 </RelativeLayout>

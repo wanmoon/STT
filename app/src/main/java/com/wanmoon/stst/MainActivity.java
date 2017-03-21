@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
-import java.security.acl.AclNotFoundException;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -23,10 +27,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         resultTEXT = (TextView)findViewById(R.id.TVresult);
+
+        // in FAB button
+        ImageView FAB_ic = new ImageView(this); // Create an icon
+        FAB_ic.setImageDrawable(getResources().getDrawable(R.drawable.button_sub_action_dark));
+
+        FloatingActionButton FAB_actionButton = new FloatingActionButton.Builder(this)
+                .setContentView(FAB_ic)
+                .build();
+
+        //inside FAB button
+        // Speech to text api & manual add transaction
+        ImageView STT_ic = new ImageView(this);
+        ImageView manual_ic = new ImageView(this);
+
+        STT_ic.setImageDrawable(getResources().getDrawable(R.drawable.mic));
+        manual_ic.setImageDrawable(getResources().getDrawable(R.drawable.button_action_dark_touch));
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+
+        SubActionButton STT_btn = itemBuilder.setContentView(STT_ic).build();
+        SubActionButton manual_btn = itemBuilder.setContentView(manual_ic).build();
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(STT_btn)
+                .addSubActionView(manual_btn)
+                .attachTo(FAB_actionButton)
+                .build();
     }
 
     public void onButtonClick(View v){
-        if(v.getId() == R.id.imageButton){
+        if(v.getId() == R.id.speakNow){
             promptSpeechInput();
         }
     }
@@ -57,5 +88,4 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
 }
