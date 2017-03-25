@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView resultTEXT;
+    public String voiceText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
         resultTEXT = (TextView)findViewById(R.id.TVresult);
 
+        FAB();
+    }
+
+    public void FAB(){
         // in FAB button
         ImageView FAB_ic = new ImageView(this); // Create an icon
         FAB_ic.setImageDrawable(getResources().getDrawable(R.drawable.button_sub_action_dark));
@@ -37,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         //inside FAB button
-        // Speech to text api & manual add transaction
         ImageView STT_ic = new ImageView(this);
         ImageView manual_ic = new ImageView(this);
 
@@ -80,10 +85,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(result_code, result_code, i);
 
         switch (requestcode){
-            case 100: if(result_code==RESULT_OK && i!=null){
+            case 100: if(result_code == RESULT_OK && i!=null){
                 ArrayList<String> result = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-
                 resultTEXT.setText(result.get(0));
+
+                //keep text in string
+                voiceText = resultTEXT.getText().toString();
             }
                 break;
         }
